@@ -45,8 +45,8 @@ var questions = [
         answerChoice2: "<javascript>",
         answerChoice3: "<script>",
         answerChoice4: "<js>",
-        correctanswer: "<script>",
-        userResponse: "document.get"
+        correctanswer: "<script>"
+       
 
     },
     {

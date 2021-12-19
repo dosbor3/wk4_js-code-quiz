@@ -8,22 +8,18 @@ function startTimer() {
     timer = setInterval(function() {        
         displayTime.textContent = "Time: " + timeRemaining;
         timeRemaining --;
-        if ((timeRemaining % 25 === 0 && timeRemaining > 0) || clickEvent == true) {             
+        if ((timeRemaining % 5 === 0 && timeRemaining > 0) || clickEvent == true) {             
             count++;
             displayQuestions(count);
             clickEvent = false;
         }
-
-        if(timeRemaining <= 0){
+        if (timeRemaining <= 0){
             displayTime.textContent = "Time: OUT OF TIME!!";                 
             endGame();
             clearInterval(timer);
-            count = 0;
-            
+            count = 0;            
         }
-
-    }, 1000);
-    
+    }, 1000);    
 }
 
 function removeQuizTitle() {
@@ -62,7 +58,17 @@ function displayQuestions(count) {
                 userAnswer = questions[count].answerChoice4;
                 checkAnswer(count);
                 clickEvent = true;            
-            });    
+            }); 
+            if (!userAnswer ){
+                checkAnswer(count);
+            }
+            else if (!userAnswer && timeRemaining <= 0){
+                displayTime.textContent = "Time: OUT OF TIME!!";                 
+                endGame();
+                clearInterval(timer);
+                count = 0;          
+            }
+               
     }
 
     
@@ -79,14 +85,16 @@ function displayQuestions(count) {
     
 
     function checkAnswer(count) {
+        //console.log(questions[count].correctanswer);
+        console.log(count);
         var userPrompt = document.createElement("h3");
         userPrompt.setAttribute("id", "user-prompt");
         userPrompt.setAttribute("class", "p-3 bg-primary text-white text-center");
-        document.getElementById("main").append(userPrompt);
-        
+        document.getElementById("main").append(userPrompt);   
 
         
         
+
         if (questions[count].correctanswer === userAnswer){              
             score += 10;            
             document.getElementById("user-prompt").style.visibility = "visible";
@@ -106,7 +114,8 @@ function displayQuestions(count) {
             document.getElementById("main").append(userPrompt);
             userPrompt.innerHTML = "WRONG!!!";
         }    
-        var removePrompt = document.getElementById("user-prompt").style.visibility = "hidden";        
+        var removePrompt = document.getElementById("user-prompt").remove();
+        count++;        
     }
 
     function endGame() {
