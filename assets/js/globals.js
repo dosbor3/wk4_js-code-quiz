@@ -6,8 +6,10 @@ var score = 0;
 var userInitials = "";
 var timer = 0;
 var myInterval = setInterval(timer, 1000);
-var timeRemaining = 10;
+var timeRemaining = 30;
 var count = 0;  //<-- used to loop through questions array
+var userAnswer = "";
+divEl = "";
 
 
 var questions = [
@@ -21,7 +23,7 @@ var questions = [
 
     },
     {
-        question:"What is the correct JavaScript syntax to change the content of the HTML element below\n"+
+        question:"What is the correct JavaScript syntax to change the content of the HTML element " +
                  "<p id=\"demo\">This is a demonstration.</p>",
         answerChoice1: "#demo.innerHTML = \"Hello World!;\"",
         answerChoice2: "document.getElement(\"p\").innerHTML = \"Hello World!\";",
@@ -100,8 +102,5 @@ var questions = [
         correctanswer: "if(i == 5)"
 
     },
-]
+];
 
-console.log(questions[0].question);
-console.log(questions[1].question);
-console.log(questions[1].answerChoice1);
