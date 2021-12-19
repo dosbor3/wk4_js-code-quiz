@@ -1,11 +1,14 @@
 var startBtn = document.getElementById("start-btn");
-var highScore = document.getElementById("view-high-score");
-var timer = document.getElementById("view-timer");
+var displayHighScore = document.getElementById("view-high-score");
+var displayTime = document.getElementById("view-timer");
 
 var score = 0;
 var userInitials = "";
 var timer = 0;
-var timeRemaining = 50;
+var myInterval = setInterval(timer, 1000);
+var timeRemaining = 10;
+var count = 0;  //<-- used to loop through questions array
+
 
 var questions = [
     {
