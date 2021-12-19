@@ -86,8 +86,9 @@ var questions = [
         question:"The external JavaScript file must contain the <script> tag.",
         answerChoice1: "True",
         answerChoice2: "False", 
-        answerChoice3: "Either True or False",       
-        correctanswer: "Only True when NOT False"
+        answerChoice3: "Either True or False",  
+        answerChoice4: "Only True when NOt False",     
+        correctanswer: "False"
 
     },
     {
