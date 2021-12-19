@@ -9,7 +9,10 @@ var myInterval = setInterval(timer, 1000);
 var timeRemaining = 30;
 var count = 0;  //<-- used to loop through questions array
 var userAnswer = "";
-divEl = "";
+var divEl = "";
+var clickEvent = false;
+var gameOver = false;
+var questionsMissed = 0;
 
 document.getElementById("main").setAttribute("class", "text-center text-primary");
 document.getElementById("questions").setAttribute("class", "text-center text-primary");
@@ -42,7 +45,8 @@ var questions = [
         answerChoice2: "<javascript>",
         answerChoice3: "<script>",
         answerChoice4: "<js>",
-        correctanswer: "<script>"
+        correctanswer: "<script>",
+        userResponse: "document.get"
 
     },
     {
@@ -56,12 +60,12 @@ var questions = [
 
     },
     {
-        question:"Inside which HTML element do we put the JavaScript?",
-        answerChoice1: "<scripting>",
-        answerChoice2: "<javascript>",
-        answerChoice3: "<script>",
-        answerChoice4: "<js>",
-        correctanswer: "<script>"
+        question:"What does the acronym DOM stand for?",
+        answerChoice1: "Declaration Object Model",
+        answerChoice2: "Declaration Observance Mode",
+        answerChoice3: "Document Observance Model",
+        answerChoice4: "Document Object Model",
+        correctanswer: "Document Object Model"
 
     },
     {
