@@ -30,51 +30,34 @@ function removeQuizTitle() {
 }
 
 function displayQuestions(count) {
-    document.getElementById("main").setAttribute("class", "text-center text-primary");
-    document.getElementById("questions").setAttribute("class", "text-center text-primary");
-    divEl = document.createElement("div");
-    divEl.setAttribute("class", "btn-group-lg btn-group-vertical answer-choices");
-    divEl.setAttribute("id", "btn");
-        
     if (timeRemaining > 0) {
-
-        //create h2 element
-        var displayedQuestion = document.createElement("h2");
-        displayedQuestion.setAttribute("class", "questions");
         displayedQuestion.textContent = questions[count].question;
 
-        // create 
-        var displayed_ac_1 = document.createElement("button");
-        displayed_ac_1.setAttribute("class", "btn m-3 p-3 btn-primary");
-        displayed_ac_1.textContent = "1.  " + questions[count].answerChoice1;
+        displayed_ac_1.textContent = questions[count].answerChoice1;
         displayed_ac_1.addEventListener("click", function() {
             userAnswer = questions[count].answerChoice1;
             checkAnswer(count);
         });
 
-        var displayed_ac_2 = document.createElement("button");
-        displayed_ac_2.setAttribute("class", "btn m-3 p-3 btn-primary");
-        displayed_ac_2.textContent = "2.  " + questions[count].answerChoice2;
+        displayed_ac_2.textContent = questions[count].answerChoice2;
         displayed_ac_2.addEventListener("click", function() {
             userAnswer = questions[count].answerChoice2;
             checkAnswer(count);
         });
-
-        var displayed_ac_3 = document.createElement("button");
-        displayed_ac_3.setAttribute("class", "btn m-3 p-3 btn-primary");
-        displayed_ac_3.textContent = "3.  " + questions[count].answerChoice3;
+        
+        displayed_ac_3.textContent = questions[count].answerChoice3;
         displayed_ac_3.addEventListener("click", function() {
             userAnswer = questions[count].answerChoice3;
             checkAnswer(count);
         });
 
-        var displayed_ac_4 = document.createElement("button");
-        displayed_ac_4.setAttribute("class", "btn m-3 p-3 btn-primary");
-        displayed_ac_4.textContent = "4.  " + questions[count].answerChoice4;
+        
+        displayed_ac_4.textContent = questions[count].answerChoice4;
         displayed_ac_4.addEventListener("click", function() {
             userAnswer = questions[count].answerChoice4;
             checkAnswer(count);            
-        });
+        });    
+    }
 
         //display question and answer choices
         document.getElementById("questions").append(displayedQuestion);
@@ -85,8 +68,7 @@ function displayQuestions(count) {
         document.getElementById("btn").append(displayed_ac_2);
         document.getElementById("btn").append(displayed_ac_3);
         document.getElementById("btn").append(displayed_ac_4);
-        }             
-    }
+}             
     
 
     function checkAnswer(count) {

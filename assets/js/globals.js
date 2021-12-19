@@ -11,6 +11,29 @@ var count = 0;  //<-- used to loop through questions array
 var userAnswer = "";
 divEl = "";
 
+document.getElementById("main").setAttribute("class", "text-center text-primary");
+document.getElementById("questions").setAttribute("class", "text-center text-primary");
+divEl = document.createElement("div");
+divEl.setAttribute("class", "btn-group-lg btn-group-vertical answer-choices");
+divEl.setAttribute("id", "btn");
+var displayedQuestion = document.createElement("h2");
+displayedQuestion.setAttribute("class", "questions");  
+
+var displayed_ac_1 = document.createElement("button");
+displayed_ac_1.setAttribute("class", "btn m-3 p-3 btn-primary");
+displayed_ac_1.setAttribute("id", "btn-1");
+
+var displayed_ac_2 = document.createElement("button");
+displayed_ac_2.setAttribute("class", "btn m-3 p-3 btn-primary");
+displayed_ac_2.setAttribute("id", "btn-2");
+
+var displayed_ac_3 = document.createElement("button");
+displayed_ac_3.setAttribute("class", "btn m-3 p-3 btn-primary");
+displayed_ac_3.setAttribute("id", "btn-3");
+
+var displayed_ac_4 = document.createElement("button");
+displayed_ac_4.setAttribute("class", "btn m-3 p-3 btn-primary");
+displayed_ac_4.setAttribute("id", "btn-4");
 
 var questions = [
     {
@@ -62,8 +85,9 @@ var questions = [
     {
         question:"The external JavaScript file must contain the <script> tag.",
         answerChoice1: "True",
-        answerChoice2: "False",        
-        correctanswer: "False"
+        answerChoice2: "False", 
+        answerChoice3: "Either True or False",       
+        correctanswer: "Only True when NOT False"
 
     },
     {
