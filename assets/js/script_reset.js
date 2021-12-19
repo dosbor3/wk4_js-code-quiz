@@ -16,10 +16,9 @@ function startTimer() {
 
         if(timeRemaining <= 0){
             displayTime.textContent = "Time: OUT OF TIME!!";                 
-            endGame();
             clearInterval(timer);
             count = 0;
-            
+            endGame();
         }
 
     }, 1000);
@@ -33,36 +32,40 @@ function removeQuizTitle() {
 }
 
 function displayQuestions(count) {
-    if (timeRemaining > 0) {        
-            displayedQuestion.textContent = questions[count].question;
+    if (timeRemaining > 0) {
+
+
+        for ( var i = 0; i < questions.length; i ++){
+            displayedQuestion.textContent = questions[i].question;
+
             displayed_ac_1.textContent = questions[count].answerChoice1;
             displayed_ac_1.addEventListener("click", function() {
-                userAnswer = questions[count].answerChoice1;
-                checkAnswer(count);
-                clickEvent = true;           
-            });    
+            userAnswer = questions[count].answerChoice1;
+            checkAnswer(count);
+            
+        }
         
-            displayed_ac_2.textContent = questions[count].answerChoice2;
-            displayed_ac_2.addEventListener("click", function() {
-                userAnswer = questions[count].answerChoice2;
-                checkAnswer(count);
-                clickEvent = true;
-            });
-            
-            displayed_ac_3.textContent = questions[count].answerChoice3;
-            displayed_ac_3.addEventListener("click", function() {
-                userAnswer = questions[count].answerChoice3;
-                checkAnswer(count);
-                clickEvent = true;
-            });
 
-            
-            displayed_ac_4.textContent = questions[count].answerChoice4;
-            displayed_ac_4.addEventListener("click", function() {
-                userAnswer = questions[count].answerChoice4;
-                checkAnswer(count);
-                clickEvent = true;            
-            });    
+        
+        
+        displayed_ac_2.textContent = questions[count].answerChoice2;
+        displayed_ac_2.addEventListener("click", function() {
+            userAnswer = questions[count].answerChoice2;
+            checkAnswer(count);
+        });
+        
+        displayed_ac_3.textContent = questions[count].answerChoice3;
+        displayed_ac_3.addEventListener("click", function() {
+            userAnswer = questions[count].answerChoice3;
+            checkAnswer(count);
+        });
+
+        
+        displayed_ac_4.textContent = questions[count].answerChoice4;
+        displayed_ac_4.addEventListener("click", function() {
+            userAnswer = questions[count].answerChoice4;
+            checkAnswer(count);            
+        });    
     }
 
     
@@ -83,15 +86,19 @@ function displayQuestions(count) {
         userPrompt.setAttribute("id", "user-prompt");
         userPrompt.setAttribute("class", "p-3 bg-primary text-white text-center");
         document.getElementById("main").append(userPrompt);
-        
+        document.getElementById("user-prompt").style.visibility = "hidden";
+
 
         
-        
-        if (questions[count].correctanswer === userAnswer){              
+        console.log(localStorage.getItem("correctResponse"));
+        console.log(localStorage.getItem("userResponse"));
+        if (localStorage.getItem("correctResponse") === localStorage.getItem("userResponse")){    
+            
             score += 10;            
             document.getElementById("user-prompt").style.visibility = "visible";
-            document.getElementById("main").append(userPrompt);
-            userPrompt.innerHTML = "CORRECT!!!";          
+            userPrompt.innerHTML = "CORRECT!!!";
+
+          
         }
         else {
             score -= 10;                 
@@ -103,10 +110,12 @@ function displayQuestions(count) {
 
             displayHighScore.innerHTML = "Score: " + score;
             document.getElementById("user-prompt").style.visibility = "visible";
-            document.getElementById("main").append(userPrompt);
             userPrompt.innerHTML = "WRONG!!!";
-        }    
-        var removePrompt = document.getElementById("user-prompt").style.visibility = "hidden";        
+
+        }          
+        
+        userPrompt.remove();
+             
     }
 
     function endGame() {
@@ -120,7 +129,7 @@ function displayQuestions(count) {
 
             var endGameMessage = document.createElement("h4");
             endGameMessage.setAttribute("class", "text-center");
-            endGameMessage.innerHTML = "Your Final Score is " + score;
+            endGameMessage.innerHTML = "Your Final Score is " + saved_score;
             
             var textLabel = document.createElement("label");
             textLabel.setAttribute("class", "text-center col-xs-2 text-center text-blue");
