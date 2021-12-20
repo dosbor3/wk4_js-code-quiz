@@ -1,7 +1,7 @@
 # js-code-quiz
 
 
-Js code Quiz is an application that provides a timed quiz with questions referencing JavaScipt content.
+Js code Quiz is an application that provides a timed quiz with questions referencing JavaScipt content.  The quiz is a timed quiz on JavaScript fundamentals that stores high scores to allow users to track progress.    When the user selects the start button, the timed quiz will begin by displaying the first question with answer choices in the form of buttons.  If the user selects the incorrect answer, they will be penalized with a score and timer deduction.  After selecting an answer choice, the user will be prompted with another quiz question.  If the user doesn't select an answer choice within 10 seconds, the quiz will advance to the next question, resulting in a score and time deduction.  The quiz will continue until the user completes all questions, or the timer runs out.  
 
 ## Installation
 
