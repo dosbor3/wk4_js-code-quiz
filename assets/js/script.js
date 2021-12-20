@@ -99,13 +99,11 @@ function displayQuestions(count) {
 
         if (tester == userAnswer){              
             score += 10;
-            tester = "wrong";
-            
+            displayHighScore.innerHTML = "Score: " + score; 
         }
         else {
             score -= 10;                 
             timeRemaining -= 10;
-            tester = "wrong";
 
             if (timeRemaining <= 0 ){
                 timeRemaining = 0;
