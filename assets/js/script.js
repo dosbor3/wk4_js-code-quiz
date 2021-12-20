@@ -30,74 +30,51 @@ function removeQuizTitle() {
 }
 
 function displayQuestions(count) {
-    //debugger
-    //if (timeRemaining > 0 && count < 9) {   
+    displayedQuestion.textContent = questions[count].question;
 
-            displayedQuestion.textContent = questions[count].question;
+    displayed_ac_1.textContent = questions[count].answerChoice1;          
+    displayed_ac_1.addEventListener("click", function() {
+        userAnswer = questions[count].answerChoice1;
+        checkAnswer(count);
+        clickEvent = true;           
+    });    
 
-            displayed_ac_1.textContent = questions[count].answerChoice1;          
-            displayed_ac_1.addEventListener("click", function() {
-                userAnswer = questions[count].answerChoice1;
-                checkAnswer(count);
-                clickEvent = true;           
-            });    
-        
-            displayed_ac_2.textContent = questions[count].answerChoice2;
-            displayed_ac_2.addEventListener("click", function() {
-                userAnswer = questions[count].answerChoice2;
-                checkAnswer(count);
-                clickEvent = true;
-            });
-            
-            displayed_ac_3.textContent = questions[count].answerChoice3;
-            displayed_ac_3.addEventListener("click", function() {
-                userAnswer = questions[count].answerChoice3;
-                checkAnswer(count);
-                clickEvent = true;
-            });
-
-            
-            displayed_ac_4.textContent = questions[count].answerChoice4;
-            displayed_ac_4.addEventListener("click", function() {
-                userAnswer = questions[count].answerChoice4;
-                checkAnswer(count);
-                clickEvent = true;            
-            }); 
-            
-            
-
-           /* if (!userAnswer ) {
-                checkAnswer(count);
-            }
-            else if (!userAnswer && timeRemaining <= 0){
-                displayTime.textContent = "Time: OUT OF TIME!!";                 
-                endGame();
-                clearInterval(timer);
-                count = 0;   
-            }  
-            else {
-                checkAnswer(count);
-            }  */   
+    displayed_ac_2.textContent = questions[count].answerChoice2;
+    displayed_ac_2.addEventListener("click", function() {
+        userAnswer = questions[count].answerChoice2;
+        checkAnswer(count);
+        clickEvent = true;
+    });
+    
+    displayed_ac_3.textContent = questions[count].answerChoice3;
+    displayed_ac_3.addEventListener("click", function() {
+        userAnswer = questions[count].answerChoice3;
+        checkAnswer(count);
+        clickEvent = true;
+    });
 
     
-        //display question and answer choices
-        document.getElementById("questions").append(displayedQuestion);
-        document.getElementById("main").append(divEl);
-        
-        //append items
-        document.getElementById("btn").append(displayed_ac_1);
-        document.getElementById("btn").append(displayed_ac_2);
-        document.getElementById("btn").append(displayed_ac_3);
-        document.getElementById("btn").append(displayed_ac_4);
+    displayed_ac_4.textContent = questions[count].answerChoice4;
+    displayed_ac_4.addEventListener("click", function() {
+        userAnswer = questions[count].answerChoice4;
+        checkAnswer(count);
+        clickEvent = true;            
+    }); 
+
+//display question and answer choices
+document.getElementById("questions").append(displayedQuestion);
+document.getElementById("main").append(divEl);
+
+//append items
+document.getElementById("btn").append(displayed_ac_1);
+document.getElementById("btn").append(displayed_ac_2);
+document.getElementById("btn").append(displayed_ac_3);
+document.getElementById("btn").append(displayed_ac_4);
 }             
     
 
-    function checkAnswer(count) {       
-        
-        var tester = questions[count].correctanswer;
-        console.log(tester);
-
-        if (tester == userAnswer){              
+    function checkAnswer(count) { 
+        if (questions[count].correctanswer == userAnswer){              
             score += 10;
             displayHighScore.innerHTML = "Score: " + score; 
         }
@@ -109,6 +86,10 @@ function displayQuestions(count) {
                 timeRemaining = 0;
             } 
 
+            if (score < 0){
+                score = 0;
+            }
+            
             displayHighScore.innerHTML = "Score: " + score;            
         }                
     }
