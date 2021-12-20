@@ -20,6 +20,6 @@ Please make sure to update tests as appropriate.  Code can be found at https://g
 
 ## Image of Application 
 
-![Screenshot 2021-12-19 210645](https://user-images.githubusercontent.com/40706088/146706677-7d9505ff-e84b-45e6-b975-606bde44f9d1.jpg)
+![Screenshot 2021-12-19 210645](https://user-images.githubusercontent.com/40706088/146707357-a07d047a-5d27-4cef-acac-9f29800a630f.jpg)
 
 
