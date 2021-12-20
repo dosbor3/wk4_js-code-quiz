@@ -7,22 +7,20 @@ startBtn.addEventListener("click", function(event) {
 function startTimer() {
     timer = setInterval(function() {        
         displayTime.textContent = "Time: " + timeRemaining;
-        timeRemaining --;
-        if ((timeRemaining % 25 === 0 && timeRemaining > 0) || clickEvent == true) {             
+        timeRemaining --;     
+        if ((timeRemaining % 10 === 0 && timeRemaining > 0) || clickEvent == true) {             
             count++;
             displayQuestions(count);
             clickEvent = false;
+            //console.log("StartTimer function and count of " + count);
         }
-
-        if(timeRemaining <= 0){
+        if (timeRemaining <= 0 || count > 9) {
             displayTime.textContent = "Time: OUT OF TIME!!";                 
-            clearInterval(timer);
-            count = 0;
             endGame();
+            clearInterval(timer);
+            count = 0;            
         }
-
-    }, 1000);
-    
+    }, 1000);    
 }
 
 function removeQuizTitle() {
@@ -32,41 +30,54 @@ function removeQuizTitle() {
 }
 
 function displayQuestions(count) {
-    if (timeRemaining > 0) {
+    //debugger
+    //if (timeRemaining > 0 && count < 9) {   
 
+            displayedQuestion.textContent = questions[count].question;
 
-        for ( var i = 0; i < questions.length; i ++){
-            displayedQuestion.textContent = questions[i].question;
-
-            displayed_ac_1.textContent = questions[count].answerChoice1;
+            displayed_ac_1.textContent = questions[count].answerChoice1;          
             displayed_ac_1.addEventListener("click", function() {
-            userAnswer = questions[count].answerChoice1;
-            checkAnswer(count);
+                userAnswer = questions[count].answerChoice1;
+                checkAnswer(count);
+                clickEvent = true;           
+            });    
+        
+            displayed_ac_2.textContent = questions[count].answerChoice2;
+            displayed_ac_2.addEventListener("click", function() {
+                userAnswer = questions[count].answerChoice2;
+                checkAnswer(count);
+                clickEvent = true;
+            });
             
-        }
-        
+            displayed_ac_3.textContent = questions[count].answerChoice3;
+            displayed_ac_3.addEventListener("click", function() {
+                userAnswer = questions[count].answerChoice3;
+                checkAnswer(count);
+                clickEvent = true;
+            });
 
-        
-        
-        displayed_ac_2.textContent = questions[count].answerChoice2;
-        displayed_ac_2.addEventListener("click", function() {
-            userAnswer = questions[count].answerChoice2;
-            checkAnswer(count);
-        });
-        
-        displayed_ac_3.textContent = questions[count].answerChoice3;
-        displayed_ac_3.addEventListener("click", function() {
-            userAnswer = questions[count].answerChoice3;
-            checkAnswer(count);
-        });
+            
+            displayed_ac_4.textContent = questions[count].answerChoice4;
+            displayed_ac_4.addEventListener("click", function() {
+                userAnswer = questions[count].answerChoice4;
+                checkAnswer(count);
+                clickEvent = true;            
+            }); 
+            
+            
 
-        
-        displayed_ac_4.textContent = questions[count].answerChoice4;
-        displayed_ac_4.addEventListener("click", function() {
-            userAnswer = questions[count].answerChoice4;
-            checkAnswer(count);            
-        });    
-    }
+           /* if (!userAnswer ) {
+                checkAnswer(count);
+            }
+            else if (!userAnswer && timeRemaining <= 0){
+                displayTime.textContent = "Time: OUT OF TIME!!";                 
+                endGame();
+                clearInterval(timer);
+                count = 0;   
+            }  
+            else {
+                checkAnswer(count);
+            }  */   
 
     
         //display question and answer choices
@@ -81,41 +92,27 @@ function displayQuestions(count) {
 }             
     
 
-    function checkAnswer(count) {
-        var userPrompt = document.createElement("h3");
-        userPrompt.setAttribute("id", "user-prompt");
-        userPrompt.setAttribute("class", "p-3 bg-primary text-white text-center");
-        document.getElementById("main").append(userPrompt);
-        document.getElementById("user-prompt").style.visibility = "hidden";
-
-
+    function checkAnswer(count) {       
         
-        console.log(localStorage.getItem("correctResponse"));
-        console.log(localStorage.getItem("userResponse"));
-        if (localStorage.getItem("correctResponse") === localStorage.getItem("userResponse")){    
-            
-            score += 10;            
-            document.getElementById("user-prompt").style.visibility = "visible";
-            userPrompt.innerHTML = "CORRECT!!!";
+        var tester = questions[count].correctanswer;
+        console.log(tester);
 
-          
+        if (tester == userAnswer){              
+            score += 10;
+            tester = "wrong";
+            
         }
         else {
             score -= 10;                 
             timeRemaining -= 10;
+            tester = "wrong";
 
             if (timeRemaining <= 0 ){
                 timeRemaining = 0;
             } 
 
-            displayHighScore.innerHTML = "Score: " + score;
-            document.getElementById("user-prompt").style.visibility = "visible";
-            userPrompt.innerHTML = "WRONG!!!";
-
-        }          
-        
-        userPrompt.remove();
-             
+            displayHighScore.innerHTML = "Score: " + score;            
+        }                
     }
 
     function endGame() {
@@ -129,7 +126,7 @@ function displayQuestions(count) {
 
             var endGameMessage = document.createElement("h4");
             endGameMessage.setAttribute("class", "text-center");
-            endGameMessage.innerHTML = "Your Final Score is " + saved_score;
+            endGameMessage.innerHTML = "Your Final Score is " + score;
             
             var textLabel = document.createElement("label");
             textLabel.setAttribute("class", "text-center col-xs-2 text-center text-blue");

@@ -7,13 +7,14 @@ startBtn.addEventListener("click", function(event) {
 function startTimer() {
     timer = setInterval(function() {        
         displayTime.textContent = "Time: " + timeRemaining;
-        timeRemaining --;
-        if ((timeRemaining % 5 === 0 && timeRemaining > 0) || clickEvent == true) {             
+        timeRemaining --;     
+        if ((timeRemaining % 10 === 0 && timeRemaining > 0) || clickEvent == true) {             
             count++;
             displayQuestions(count);
             clickEvent = false;
+            //console.log("StartTimer function and count of " + count);
         }
-        if (timeRemaining <= 0){
+        if (timeRemaining <= 0 || count > 9) {
             displayTime.textContent = "Time: OUT OF TIME!!";                 
             endGame();
             clearInterval(timer);
@@ -29,9 +30,12 @@ function removeQuizTitle() {
 }
 
 function displayQuestions(count) {
-    if (timeRemaining > 0) {        
+    //debugger
+    //if (timeRemaining > 0 && count < 9) {   
+
             displayedQuestion.textContent = questions[count].question;
-            displayed_ac_1.textContent = questions[count].answerChoice1;
+
+            displayed_ac_1.textContent = questions[count].answerChoice1;          
             displayed_ac_1.addEventListener("click", function() {
                 userAnswer = questions[count].answerChoice1;
                 checkAnswer(count);
@@ -59,17 +63,21 @@ function displayQuestions(count) {
                 checkAnswer(count);
                 clickEvent = true;            
             }); 
-            if (!userAnswer ){
+            
+            
+
+           /* if (!userAnswer ) {
                 checkAnswer(count);
             }
             else if (!userAnswer && timeRemaining <= 0){
                 displayTime.textContent = "Time: OUT OF TIME!!";                 
                 endGame();
                 clearInterval(timer);
-                count = 0;          
-            }
-               
-    }
+                count = 0;   
+            }  
+            else {
+                checkAnswer(count);
+            }  */   
 
     
         //display question and answer choices
@@ -84,38 +92,27 @@ function displayQuestions(count) {
 }             
     
 
-    function checkAnswer(count) {
-        //console.log(questions[count].correctanswer);
-        console.log(count);
-        var userPrompt = document.createElement("h3");
-        userPrompt.setAttribute("id", "user-prompt");
-        userPrompt.setAttribute("class", "p-3 bg-primary text-white text-center");
-        document.getElementById("main").append(userPrompt);   
-
+    function checkAnswer(count) {       
         
-        
+        var tester = questions[count].correctanswer;
+        console.log(tester);
 
-        if (questions[count].correctanswer === userAnswer){              
-            score += 10;            
-            document.getElementById("user-prompt").style.visibility = "visible";
-            document.getElementById("main").append(userPrompt);
-            userPrompt.innerHTML = "CORRECT!!!";          
+        if (tester == userAnswer){              
+            score += 10;
+            tester = "wrong";
+            
         }
         else {
             score -= 10;                 
             timeRemaining -= 10;
+            tester = "wrong";
 
             if (timeRemaining <= 0 ){
                 timeRemaining = 0;
             } 
 
-            displayHighScore.innerHTML = "Score: " + score;
-            document.getElementById("user-prompt").style.visibility = "visible";
-            document.getElementById("main").append(userPrompt);
-            userPrompt.innerHTML = "WRONG!!!";
-        }    
-        var removePrompt = document.getElementById("user-prompt").remove();
-        count++;        
+            displayHighScore.innerHTML = "Score: " + score;            
+        }                
     }
 
     function endGame() {
