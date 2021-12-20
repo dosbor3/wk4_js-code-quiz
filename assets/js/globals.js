@@ -9,18 +9,18 @@ var myInterval = setInterval(timer, 1000);
 var timeRemaining = 200;
 var count = 0;  //<-- used to loop through questions array
 var userAnswer = "";
-var myCount = 0;
-var correctChoice = "";
 var divEl = "";
 var clickEvent = false;
 var gameOver = false;
-var questionsMissed = 0;
+
 
 document.getElementById("main").setAttribute("class", "text-center text-primary");
 document.getElementById("questions").setAttribute("class", "text-center text-primary");
 divEl = document.createElement("div");
 divEl.setAttribute("class", "btn-group-lg btn-group-vertical answer-choices");
 divEl.setAttribute("id", "btn");
+
+
 var displayedQuestion = document.createElement("h2");
 displayedQuestion.setAttribute("class", "questions");  
 
